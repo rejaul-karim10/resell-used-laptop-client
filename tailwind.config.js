@@ -5,10 +5,10 @@ module.exports = {
     themes: [
       {
         doctorPortalTheme: {
-          primary: "#0FCFEC",
-          secondary: "#19D3AE",
-          accent: "#3A4256",
-          "base-100": "#EBEDF5",
+          primary: "#004346",
+          secondary: "#75DDDD",
+          accent: "#2E282A",
+          "base-100": "#F7F4F3",
         },
       },
     ],
