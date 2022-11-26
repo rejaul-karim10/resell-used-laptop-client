@@ -7,10 +7,6 @@ const Navbar = () => {
       <li>
         <Link to="/">Home</Link>
       </li>
-
-      <li>
-        <Link to="/"></Link>
-      </li>
       <li>
         <Link to="/login">Login</Link>
       </li>
@@ -47,7 +43,7 @@ const Navbar = () => {
           </ul>
         </div>
         <Link to="/" className="text-2xl font-bold uppercase text-primary">
-          Resell <span className="text-secondary">Used Laptop</span> 
+          Resell <span className="text-secondary">Used Laptop</span>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
