@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 
 const Register = () => {
   const {
@@ -8,11 +9,22 @@ const Register = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+  const { createUser } = useContext(AuthContext);
+
+  const handleSignUp = (data) => {
+    createUser(data.email, data.password )
+    .then(result =>{
+      const user = result.user
+      console.log(user);
+    })
+    .catch(error => console.log(error))
+  };
+
   return (
     <div className="h-[800px] flex justify-center items-center">
       <div className="w-96 p-7">
         <h2 className="text-xl text-center">Register an Account</h2>
-        <form>
+        <form onSubmit={handleSubmit(handleSignUp)}>
           <div className="form-control w-full max-w-xs">
             <label className="label">
               {" "}
@@ -66,9 +78,9 @@ const Register = () => {
               })}
               className="input input-bordered input-primary w-full max-w-xs"
             />
-            {/* {errors.password && (
-                <p className="text-red-500">{errors.password.message}</p>
-              )} */}
+            {errors.password && (
+              <p className="text-red-500">{errors.password.message}</p>
+            )}
           </div>
           <input
             className="btn btn-primary w-full mt-4"
@@ -84,7 +96,9 @@ const Register = () => {
           </Link>
         </p>
         <div className="divider">OR</div>
-        <button className="btn btn-outline btn-accent w-full">CONTINUE WITH GOOGLE</button>
+        <button className="btn btn-outline btn-accent w-full">
+          CONTINUE WITH GOOGLE
+        </button>
       </div>
     </div>
   );
