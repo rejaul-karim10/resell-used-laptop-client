@@ -19,9 +19,14 @@ const Navbar = () => {
         <Link to="/blog">Blog</Link>
       </li>
       {user?.uid ? (
+        <>
+        <li>
+        <Link to="/dashboard">Dashboard</Link>
+      </li>
         <li>
           <button onClick={handleLogout}>Logout</button>
         </li>
+        </>
       ) : (
         <li>
           <Link to="/login">Login</Link>
@@ -30,7 +35,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar bg-base-100 flex justify-between">
+    <div className="navbar  flex justify-between">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
