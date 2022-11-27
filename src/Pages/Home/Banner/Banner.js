@@ -1,19 +1,25 @@
-import React from 'react';
-import banner from '../../../assets/images/banner/banner (1).jpg';
+import React from "react";
+import banner from "../../../assets/images/banner/banner1.jpg";
+import banner2 from "../../../assets/images/banner/banner2.jpg";
+import PrimaryButton from "../../../Components/PrimaryButton/PrimaryButton";
 
 const Banner = () => {
-    return (
-        <div className="hero min-h-screen" style={{ backgroundImage: `${banner}` }}>
-        <div className="hero-overlay bg-opacity-60"></div>
-        <div className="hero-content text-center text-neutral-content">
-          <div className="max-w-md">
-            <h1 className="mb-5 text-5xl font-bold">Resell your used laptop</h1>
-            <p className="mb-5">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-            <button className="btn btn-primary">Get Started</button>
-          </div>
+  return (
+    <div className="hero pb-24 pt-24">
+      <div className="hero-content flex-col lg:flex-row-reverse">
+        <img src={banner2} className="lg:w-1/2 rounded-lg shadow-lg" alt="" />
+        <div>
+          <h1 className="text-4xl font-bold text-primary">Get second hand laptop from trustable sellers</h1>
+          <p className="py-6">
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the
+          </p>
+          <PrimaryButton>Get Started</PrimaryButton>
         </div>
       </div>
-    );
+    </div>
+  );
 };
 
 export default Banner;
