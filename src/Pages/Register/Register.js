@@ -22,8 +22,8 @@ const Register = () => {
 
   return (
     <div className="h-[800px] flex justify-center items-center">
-      <div className="w-96 p-7">
-        <h2 className="text-xl text-center">Register an Account</h2>
+      <div className="w-96 p-7 bg-white rounded-md">
+        <h2 className="text-xl text-center font-bold text-primary">Register an Account</h2>
         <form onSubmit={handleSubmit(handleSignUp)}>
           <div className="form-control w-full max-w-xs">
             <label className="label">

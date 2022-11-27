@@ -25,9 +25,9 @@ const Login = () => {
       });
   };
   return (
-    <div className="h-[800px] flex justify-center items-center">
-      <div className="w-96 p-7">
-        <h2 className="text-xl text-center font-bold text-primary">Login</h2>
+    <div className="h-[800px] flex justify-center items-center ">
+      <div className="w-96 p-7 bg-white rounded-md">
+        <h2 className="text-xl text-center font-bold text-primary">Login to account</h2>
         <form onSubmit={handleSubmit(handleLogin)}>
           <div className="form-control w-full max-w-xs">
             <label className="label">
