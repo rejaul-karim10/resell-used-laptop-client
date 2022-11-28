@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { setAuthToken } from "../../api/Auth";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 
 const Register = () => {
@@ -11,33 +12,34 @@ const Register = () => {
     handleSubmit,
   } = useForm();
   const { createUser, updateUser } = useContext(AuthContext);
-  const [ signUpError, setSignUpError]= useState('')
+  const [signUpError, setSignUpError] = useState("");
 
   const handleSignUp = (data) => {
-    setSignUpError('')
-    createUser(data.email, data.password )
-    .then(result =>{
-      const user = result.user
-      console.log(user);
-      toast.success('User Created Successfully')
-      const userInfo = {
-        displayName: data.name
-      }
-      updateUser(userInfo)
-      .then(()=>{})
-      .catch(error=>console.log(error))
-      
-    })
-    .catch(error => {
-      console.log(error)
-      setSignUpError(error.message)
-    })
+    setSignUpError("");
+    createUser(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast.success("User Created Successfully");
+        const userInfo = {
+          displayName: data.name,
+        };
+        updateUser(userInfo)
+          .then(() => {})
+          .catch((error) => console.log(error));
+      })
+      .catch((error) => {
+        console.log(error);
+        setSignUpError(error.message);
+      });
   };
 
   return (
     <div className="h-[800px] flex justify-center items-center">
       <div className="w-96 p-7 bg-white rounded-md">
-        <h2 className="text-xl text-center font-bold text-primary">Register an Account</h2>
+        <h2 className="text-xl text-center font-bold text-primary">
+          Register an Account
+        </h2>
         <form onSubmit={handleSubmit(handleSignUp)}>
           <div className="form-control w-full max-w-xs">
             <label className="label">

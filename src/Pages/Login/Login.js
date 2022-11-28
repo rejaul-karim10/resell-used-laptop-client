@@ -1,6 +1,8 @@
+import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 
 const Login = () => {
@@ -9,15 +11,36 @@ const Login = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const { loginUser } = useContext(AuthContext);
+  const { loginUser, providerLogin } = useContext(AuthContext);
   const [loginError, setLoginError] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
 
+  const from = location.state?.from?.pathname || "/";
+
+  // login with google
+  const googleProvider = new GoogleAuthProvider();
+  const handleGoogleSignIn = () => {
+    providerLogin(googleProvider)
+      .then((result) => {
+        toast.success("Successfully Logged In");
+        const user = result.user;
+        navigate(from, { replace: true });
+        console.log(user);
+      })
+      .catch((error) => setLoginError(error));
+  };
+
+  // login with email and password
   const handleLogin = (data) => {
     setLoginError("");
     loginUser(data.email, data.password)
       .then((result) => {
+        toast.success("Successfully Logged In");
+        // setAuthToken(result.user)
         const user = result.user;
         console.log(user);
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         console.log(error.message);
@@ -27,7 +50,9 @@ const Login = () => {
   return (
     <div className="h-[800px] flex justify-center items-center ">
       <div className="w-96 p-7 bg-white rounded-md">
-        <h2 className="text-xl text-center font-bold text-primary">Login to account</h2>
+        <h2 className="text-xl text-center font-bold text-primary">
+          Login to account
+        </h2>
         <form onSubmit={handleSubmit(handleLogin)}>
           <div className="form-control w-full max-w-xs">
             <label className="label">
@@ -81,7 +106,10 @@ const Login = () => {
           </Link>
         </p>
         <div className="divider">OR</div>
-        <button className="btn btn-outline btn-accent w-full">
+        <button
+          onClick={() => handleGoogleSignIn()}
+          className="btn btn-outline btn-accent w-full"
+        >
           CONTINUE WITH GOOGLE
         </button>
       </div>

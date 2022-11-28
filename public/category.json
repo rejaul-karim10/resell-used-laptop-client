@@ -1,0 +1,24 @@
+[
+    {
+      
+      "name": "MacBook",
+      "category_id": "01",
+      "image": "https://m.media-amazon.com/images/I/71TPda7cwUL._AC_SL1500_.jpg",
+      "location":"Kuala Lumpur",
+      "resale_price": "3000",
+      "original_price": "4000",
+      "years_of_use": "2",
+      "date": "28 july 2022"
+    },
+    {
+      
+      "name": "MacBook",
+      "category_id": "01",
+      "image": "https://m.media-amazon.com/images/I/71TPda7cwUL._AC_SL1500_.jpg",
+      "location":"Kuala Lumpur",
+      "resale_price": "3000",
+      "original_price": "4000",
+      "years_of_use": "2",
+      "date": "28 july 2022"
+    }
+  ]
