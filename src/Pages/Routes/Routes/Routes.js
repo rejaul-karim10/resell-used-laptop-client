@@ -1,16 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
+import AllProducts from "../../AllProducts/AllProducts/AllProducts";
 import Blog from "../../Blog/Blog";
+import CardDetails from "../../CardDetails/CardDetails";
 import AllUsers from "../../Dashboard/AllUsers/AllUsers";
-import Dashboard from "../../Dashboard/Dashboard/Dashboard";
 import MyOrders from "../../Dashboard/Dashboard/MyOrders/MyOrders";
-import CategoryCard from "../../Home/CategoryCard/CategoryCard";
 import Home from "../../Home/Home/Home";
-import ProductCategories from "../../Home/ProductCategories/ProductCategories";
 import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
 import Login from "../../Login/Login";
 import Register from "../../Register/Register";
-import SingleCard from "../../Shared/SingleCard/SingleCard";
+import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
@@ -23,15 +22,21 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: "/allProducts",
+        element: <AllProducts />,
+      },
+      {
         path: "/blog",
         element: <Blog />,
       },
+
       {
-        path:'category/:id',
-        element: <SingleCard/>,
-        // loader: ({ params }) =>
-        // fetch(`http://localhost:5000/product-categories/${params.id}`),
+        path: "/category/:name",
+        element: <CardDetails />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/product-categories/${params.name}`),
       },
+
       {
         path: "/login",
         element: <Login />,
@@ -49,16 +54,20 @@ const router = createBrowserRouter([
         <DashboardLayout />
       </PrivateRoute>
     ),
-    children:[
+    children: [
       {
-        path:'/dashboard',
-        element:<MyOrders/>
+        path: "/dashboard",
+        element: <MyOrders />,
       },
       {
-        path:'/dashboard/allUsers',
-        element:<AllUsers/>
+        path: "/dashboard/allUsers",
+        element: (
+          <AdminRoute>
+            <AllUsers />
+          </AdminRoute>
+        ),
       },
-    ]
+    ],
   },
 ]);
 export default router;

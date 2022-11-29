@@ -1,20 +1,27 @@
-import React, { useEffect, useState } from "react";
-import CategoryCard from "../CategoryCard/CategoryCard";
+import { useQuery } from "@tanstack/react-query";
+import React from "react";
+import CategoryCard from "../../Shared/CategoryCard/CategoryCard";
+import Loading from "../../Shared/Loading/Loading";
 
 const ProductCategories = () => {
-  const [categories, setCategories] = useState([]);
+  const { data: categories = [], isLoading, refetch } = useQuery({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const res = await fetch("http://localhost:5000/category");
+      const data = await res.json();
+      return data;
+    },
+  });
 
-  useEffect(() => {
-    fetch("http://localhost:5000/product-categories")
-      .then((res) => res.json())
-      .then((data) => setCategories(data));
-  }, []);
+  if(isLoading){
+    return <Loading/>
+  }
 
   return (
     <div className="mt-12">
       <div className="text-center">
         <h1 className="text-4xl font-bold text-primary">
-          All Product categories : {categories.length}
+          All Product categories :
         </h1>
         <p>Choose your future laptop from our categories</p>
       </div>
