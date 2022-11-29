@@ -1,8 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
-import { setAuthToken } from "../../api/Auth";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 
 const Register = () => {
@@ -13,6 +12,8 @@ const Register = () => {
   } = useForm();
   const { createUser, updateUser } = useContext(AuthContext);
   const [signUpError, setSignUpError] = useState("");
+  const [createdUserEmail, setCreatedUserEmail] = useState("");
+  const navigate = useNavigate();
 
   const handleSignUp = (data) => {
     setSignUpError("");
@@ -25,12 +26,32 @@ const Register = () => {
           displayName: data.name,
         };
         updateUser(userInfo)
-          .then(() => {})
+          .then(() => {
+            saveUser(data.name, data.email);
+          })
           .catch((error) => console.log(error));
       })
       .catch((error) => {
         console.log(error);
         setSignUpError(error.message);
+      });
+  };
+
+  // save user to database
+  const saveUser = (name, email) => {
+    const user = { name, email };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("save user", data);
+        navigate('/')
+        // setCreatedUserEmail(email);
       });
   };
 
