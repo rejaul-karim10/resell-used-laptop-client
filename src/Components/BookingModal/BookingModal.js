@@ -110,7 +110,7 @@ const BookingModal = ({ productData, setProductData }) => {
             <input
               name="location"
               type="text"
-              placeholder="Your location"
+              placeholder="Your Phone"
               className="input input-bordered w-full input-primary"
             />
             <input

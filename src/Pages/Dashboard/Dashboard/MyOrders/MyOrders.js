@@ -1,6 +1,28 @@
-import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { useContext } from "react";
+import { AuthContext } from "../../../../Contexts/AuthProvider/AuthProvider";
+import Loading from "../../../Shared/Loading/Loading";
 
 const MyOrders = () => {
+  const { user } = useContext(AuthContext);
+  const url = `http://localhost:5000/bookings?email=${user?.email}`;
+
+  const { data: bookings = [], isLoading , refetch } = useQuery({
+    queryKey: ["bookings", user?.email],
+    queryFn: async () => {
+      const res = await fetch(url, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
+      const data = await res.json();
+      return data;
+    },
+  });
+
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div>
       <h1>My Orders</h1>
@@ -10,30 +32,21 @@ const MyOrders = () => {
             <tr>
               <th></th>
               <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
+              <th>Product Name</th>
+              <th>Price</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Quality Control Specialist</td>
-              <td>Blue</td>
-            </tr>
-            <tr>
-              <th>2</th>
-              <td>Hart Hagerty</td>
-              <td>Desktop Support Technician</td>
-              <td>Purple</td>
-            </tr>
-
-            <tr>
-              <th>3</th>
-              <td>Brice Swyre</td>
-              <td>Tax Accountant</td>
-              <td>Red</td>
-            </tr>
+            {
+            bookings.length &&
+            bookings?.map((booking, i) => (
+              <tr key={booking._id}>
+                <th>{i + 1}</th>
+                <td>{booking.buyerName}</td>
+                <td>{booking.productName}</td>
+                <td>{booking.price}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

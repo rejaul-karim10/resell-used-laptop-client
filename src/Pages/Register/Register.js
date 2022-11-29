@@ -15,11 +15,11 @@ const Register = () => {
   const [signUpError, setSignUpError] = useState("");
   const [createdUserEmail, setCreatedUserEmail] = useState("");
 
-  const [token] = useToken(createdUserEmail)
+  const [token] = useToken(createdUserEmail);
   const navigate = useNavigate();
 
-  if(token){
-    navigate('/')
+  if (token) {
+    navigate("/");
   }
 
   const handleSignUp = (data) => {
@@ -56,10 +56,9 @@ const Register = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setCreatedUserEmail(email)
+        setCreatedUserEmail(email);
       });
   };
-
 
   return (
     <div className="h-[800px] flex justify-center items-center">
@@ -96,6 +95,13 @@ const Register = () => {
               })}
               className="input input-bordered input-primary w-full max-w-xs"
             />
+            <select className="select select-primary w-full mt-4">
+              <option disabled selected>
+                Options
+              </option>
+              <option>Seller</option>
+              <option>Buyer</option>
+            </select>
             {errors.email && (
               <p className="text-red-500">{errors.email.message}</p>
             )}
