@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
+import useToken from "../../Hooks/UseToken";
 
 const Login = () => {
   const {
@@ -13,10 +14,16 @@ const Login = () => {
   } = useForm();
   const { loginUser, providerLogin } = useContext(AuthContext);
   const [loginError, setLoginError] = useState("");
+  const [loginUserEmail, setLoginUserEmail] = useState("");
+  const [token] = useToken(loginUserEmail);
   const location = useLocation();
   const navigate = useNavigate();
 
   const from = location.state?.from?.pathname || "/";
+
+  if (token) {
+    navigate(from, { replace: true });
+  }
 
   // login with google
   const googleProvider = new GoogleAuthProvider();
@@ -37,10 +44,9 @@ const Login = () => {
     loginUser(data.email, data.password)
       .then((result) => {
         toast.success("Successfully Logged In");
-        // setAuthToken(result.user)
         const user = result.user;
         console.log(user);
-        navigate(from, { replace: true });
+        setLoginUserEmail(data.email);
       })
       .catch((error) => {
         console.log(error.message);
