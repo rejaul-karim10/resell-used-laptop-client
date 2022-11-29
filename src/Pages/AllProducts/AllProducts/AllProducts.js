@@ -5,6 +5,7 @@ import SingleProductCard from "../SingleProductCard/SingleProductCard";
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
   const [productData, setProductData] = useState(null);
+  //   const[selectedDate, selectedDate]=useState(new Date())
 
   useEffect(() => {
     fetch("http://localhost:5000/products")
@@ -21,7 +22,12 @@ const AllProducts = () => {
           setProductData={setProductData}
         ></SingleProductCard>
       ))}
-      {productData && <BookingModal productData={productData}></BookingModal>}
+      {productData && (
+        <BookingModal
+          productData={productData}
+          setProductData={setProductData}
+        ></BookingModal>
+      )}
     </div>
   );
 };
