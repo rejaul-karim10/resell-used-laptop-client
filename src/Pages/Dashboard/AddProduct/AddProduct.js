@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Loading from "../../Shared/Loading/Loading";
 
 const AddProduct = () => {
@@ -12,14 +12,14 @@ const AddProduct = () => {
     handleSubmit,
   } = useForm();
   const navigate = useNavigate();
-
-
   const imageHostKey = process.env.REACT_APP_IMAGEBB_Key;
 
   const { data: categories = [], isLoading } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/categoryName");
+      const res = await fetch(
+        "https://resell-used-laptop-server.vercel.app/categoryName"
+      );
       const data = await res.json();
       return data;
     },
@@ -52,8 +52,9 @@ const AddProduct = () => {
             descriptions: data.descriptions,
           };
           console.log(product);
+
           //   save product to the database
-          fetch("http://localhost:5000/products", {
+          fetch("https://resell-used-laptop-server.vercel.app/products", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -64,6 +65,9 @@ const AddProduct = () => {
             .then((res) => res.json())
             .then((result) => {
               console.log(result);
+              if (isLoading) {
+                return <Loading />;
+              }
               toast.success(`${data.productName} is added successfully`);
               navigate("/dashboard/myProducts");
             });
@@ -74,6 +78,7 @@ const AddProduct = () => {
   if (isLoading) {
     return <Loading />;
   }
+
   return (
     <div className="bg-white p-10">
       <h2 className="text-xl font-bold text-primary">Add A Product</h2>

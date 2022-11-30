@@ -1,19 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import toast from "react-hot-toast";
+import Loading from "../../Shared/Loading/Loading";
 
 const AllUsers = () => {
-  const { data: users = [], refetch } = useQuery({
+  const { data: users = [], isLoading, refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/users");
+      const res = await fetch("https://resell-used-laptop-server.vercel.app/users");
       const data = await res.json();
       return data;
     },
   });
 
   const handleMakeAdmin = (id) => {
-    fetch(`http://localhost:5000/users/admin/${id}`, {
+    fetch(`https://resell-used-laptop-server.vercel.app/users/admin/${id}`, {
       method: "PUT",
       headers:{
         authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -27,9 +28,13 @@ const AllUsers = () => {
         }
       });
   };
+
+  if(isLoading){
+    return<Loading/>
+  }
   return (
     <div>
-      <h2>This is all users</h2>
+      <h2>All users</h2>
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>

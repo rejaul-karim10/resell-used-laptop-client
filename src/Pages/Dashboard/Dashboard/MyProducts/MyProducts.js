@@ -6,7 +6,6 @@ import ConfirmationModal from "../../../Shared/ConfirmationModal/ConfirmationMod
 import Loading from "../../../Shared/Loading/Loading";
 
 const MyProducts = () => {
-  
   const { user } = useContext(AuthContext);
   const [deletingProduct, setDeletingProduct] = useState(null);
 
@@ -15,7 +14,7 @@ const MyProducts = () => {
   }
 
   const handleDeleteProduct = (product) => {
-    fetch(`http://localhost:5000/productDelete/${product._id}`, {
+    fetch(`https://resell-used-laptop-server.vercel.app/productDelete/${product._id}`, {
       method: "DELETE",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -25,14 +24,14 @@ const MyProducts = () => {
       .then((data) => {
         if (data.deletedCount > 0) {
           refetch();
-          toast.success(`Product ${product.name} deleted successfully`);
+          toast.success(`${product.name} deleted successfully`);
         }
       });
   };
 
 
 
-  const url = `http://localhost:5000/sellerProducts?email=${user?.email}`;
+  const url = `https://resell-used-laptop-server.vercel.app/sellerProducts?email=${user?.email}`;
 
   const {
     data: myProducts = [],

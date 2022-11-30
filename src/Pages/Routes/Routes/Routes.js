@@ -6,11 +6,13 @@ import AddProduct from "../../Dashboard/AddProduct/AddProduct";
 import AllUsers from "../../Dashboard/AllUsers/AllUsers";
 import MyOrders from "../../Dashboard/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../../Dashboard/Dashboard/MyProducts/MyProducts";
+import Payment from "../../Dashboard/Payment/Payment";
 import Home from "../../Home/Home/Home";
 import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
 import Login from "../../Login/Login";
 import Register from "../../Register/Register";
+import DisplayError from "../../Shared/DisplayError/DisplayError";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
@@ -18,6 +20,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement: <DisplayError />,
     children: [
       {
         path: "/",
@@ -40,7 +43,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/product-categories/${params.name}`),
+          fetch(
+            `https://resell-used-laptop-server.vercel.app/product-categories/${params.name}`
+          ),
       },
 
       {
@@ -60,6 +65,7 @@ const router = createBrowserRouter([
         <DashboardLayout />
       </PrivateRoute>
     ),
+    errorElement: <DisplayError />,
     children: [
       {
         path: "/dashboard/myOrders",
@@ -72,6 +78,12 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/addProduct",
         element: <AddProduct />,
+      },
+      {
+        path: "/dashboard/payment/:id",
+        element: <Payment />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/bookings/${params.id}`),
       },
       {
         path: "/dashboard/allUsers",
