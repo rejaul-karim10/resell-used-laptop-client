@@ -1,5 +1,4 @@
 import React from "react";
-import BookingModal from "../../../Components/BookingModal/BookingModal";
 
 const CategoryProduct = ({ detail }) => {
   const {
@@ -22,7 +21,7 @@ const CategoryProduct = ({ detail }) => {
       </figure>
       <div className="card-body">
         <h2 className="card-title">
-        {productName}
+          {productName}
           <div className="badge badge-primary">
             Resell Price: {resale_price}
           </div>
@@ -36,11 +35,11 @@ const CategoryProduct = ({ detail }) => {
           <div className="badge badge-outline">{postedTime} Years of use</div>
         </div>
         <label
-        
           htmlFor="booking-modal"
           className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-white border-0"
-        >Book Now</label>
-        
+        >
+          Book Now
+        </label>
       </div>
     </div>
   );

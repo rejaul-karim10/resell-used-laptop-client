@@ -5,7 +5,6 @@ import SingleProductCard from "../SingleProductCard/SingleProductCard";
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
   const [productData, setProductData] = useState(null);
-  //   const[selectedDate, selectedDate]=useState(new Date())
 
   useEffect(() => {
     fetch("http://localhost:5000/products")
@@ -14,7 +13,7 @@ const AllProducts = () => {
   }, []);
 
   return (
-    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-14">
+    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-14 w-11/12 mx-auto">
       {products.map((product) => (
         <SingleProductCard
           key={product._id}

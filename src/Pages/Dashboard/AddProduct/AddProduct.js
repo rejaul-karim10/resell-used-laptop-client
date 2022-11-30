@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { Result } from "postcss";
-import React, { Children } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { Navigate, useNavigate } from "react-router-dom";
 import Loading from "../../Shared/Loading/Loading";
 
 const AddProduct = () => {
@@ -11,6 +11,8 @@ const AddProduct = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+  const navigate = useNavigate();
+
 
   const imageHostKey = process.env.REACT_APP_IMAGEBB_Key;
 
@@ -50,21 +52,21 @@ const AddProduct = () => {
             descriptions: data.descriptions,
           };
           console.log(product);
-        //   save product to the database
-            fetch('http://localhost:5000/products',{
-              method: "POST",
-              headers: {
-                  'content-type':"application/json",
-                  authorization: `bearer ${localStorage.getItem('accessToken')}`
-              },
-              body: JSON.stringify(product)
-            })
-            .then(res=>res.json())
-            .then(result=>{
-              console.log(result)
+          //   save product to the database
+          fetch("http://localhost:5000/products", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: `bearer ${localStorage.getItem("accessToken")}`,
+            },
+            body: JSON.stringify(product),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              console.log(result);
               toast.success(`${data.productName} is added successfully`);
-            //   navigate("/dashboard/");
-            })
+              navigate("/dashboard/myProducts");
+            });
         }
       });
   };
@@ -89,8 +91,8 @@ const AddProduct = () => {
               })}
               className="input input-bordered w-full max-w-xs"
             />
-            {errors.name && (
-              <p className="text-red-500">{errors.name.message}</p>
+            {errors.productName && (
+              <p className="text-red-500">{errors.productName.message}</p>
             )}
           </div>
           <div className="form-control w-full max-w-xs">
@@ -122,18 +124,18 @@ const AddProduct = () => {
               })}
               className="input input-bordered w-full max-w-xs"
             />
-            {errors.email && (
-              <p className="text-red-500">{errors.email.message}</p>
+            {errors.postedDate && (
+              <p className="text-red-500">{errors.postedDate.message}</p>
             )}
           </div>
 
           <div className="form-control w-full max-w-xs">
             <label className="label">
               {" "}
-              <span className="label-text">Date</span>
+              <span className="label-text">Description</span>
             </label>
             <input
-              type="textarea"
+              type=""
               {...register("descriptions", {
                 required: true,
               })}

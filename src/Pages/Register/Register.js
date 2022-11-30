@@ -102,8 +102,8 @@ const Register = () => {
               <option>Seller</option>
               <option>Buyer</option>
             </select>
-            {errors.email && (
-              <p className="text-red-500">{errors.email.message}</p>
+            {errors.Options && (
+              <p className="text-red-500">{errors.Options.message}</p>
             )}
           </div>
           <div className="form-control w-full max-w-xs">

@@ -38,7 +38,7 @@ const MyOrders = () => {
           </thead>
           <tbody>
             {
-            bookings.length &&
+            
             bookings?.map((booking, i) => (
               <tr key={booking._id}>
                 <th>{i + 1}</th>
