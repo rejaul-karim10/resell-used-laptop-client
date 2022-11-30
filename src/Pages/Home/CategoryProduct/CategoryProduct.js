@@ -34,12 +34,6 @@ const CategoryProduct = ({ detail }) => {
           <div className="badge badge-outline">{years_of_use} Years of use</div>
           <div className="badge badge-outline">{postedTime} Years of use</div>
         </div>
-        <label
-          htmlFor="booking-modal"
-          className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-white border-0"
-        >
-          Book Now
-        </label>
       </div>
     </div>
   );

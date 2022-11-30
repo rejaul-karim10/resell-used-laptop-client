@@ -53,12 +53,11 @@ const CheckoutForm = ({ booking, email }) => {
           },
         },
       });
-      if(confirmError){
-        setCardError(confirmError.message)
-        return
-      }
-      console.log("paymentIntent",paymentIntent);
-    
+    if (confirmError) {
+      setCardError(confirmError.message);
+      return;
+    }
+    console.log("paymentIntent", paymentIntent);
   };
   return (
     <form onSubmit={handleSubmit}>
