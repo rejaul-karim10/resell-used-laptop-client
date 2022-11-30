@@ -1,3 +1,3 @@
 # Welcome to the project
 
-This project was build Using MERN Stack [Create React App](https://resell-used-laptop.web.app/).
+This project was build Using MERN Stack [Visit site](https://resell-used-laptop.web.app/).

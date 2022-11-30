@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 
 const CheckoutForm = ({ booking, email }) => {
   const [cardError, setCardError] = useState("");
+  const [clientSecret, setClientSecret] = useState("");
+
   const stripe = useStripe();
   const elements = useElements();
   const { price } = booking;
-
-  const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
@@ -28,7 +28,6 @@ const CheckoutForm = ({ booking, email }) => {
     if (!stripe || !elements) {
       return;
     }
-
     const card = elements.getElement(CardElement);
     if (card == null) {
       return;
@@ -44,20 +43,20 @@ const CheckoutForm = ({ booking, email }) => {
     } else {
       setCardError("");
     }
-    const { paymentIntent, error: confirmError } =
-      await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: card,
-          billing_details: {
-            email: email,
-          },
-        },
-      });
-    if (confirmError) {
-      setCardError(confirmError.message);
-      return;
-    }
-    console.log("paymentIntent", paymentIntent);
+    // const { paymentIntent, error: confirmError } =
+    //   await stripe.confirmCardPayment(clientSecret, {
+    //     payment_method: {
+    //       card: card,
+    //       billing_details: {
+    //         email: email,
+    //       },
+    //     },
+    //   });
+    // if (confirmError) {
+    //   // setCardError(confirmError.message);
+    //   return;
+    // }
+    // console.log("paymentIntent", paymentIntent);
   };
   return (
     <form onSubmit={handleSubmit}>
