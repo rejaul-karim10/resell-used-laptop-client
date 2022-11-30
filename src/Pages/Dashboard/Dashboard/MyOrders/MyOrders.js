@@ -8,6 +8,8 @@ const MyOrders = () => {
   const { user } = useContext(AuthContext);
   const url = `https://resell-used-laptop-server.vercel.app/bookings?email=${user?.email}`;
 
+  
+
   const {
     data: bookings = [],
     isLoading,
@@ -24,6 +26,7 @@ const MyOrders = () => {
       return data;
     },
   });
+  console.log(bookings);
 
   if (isLoading) {
     return <Loading />;

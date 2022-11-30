@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import BookingModal from "../../../Components/BookingModal/BookingModal";
 import SingleProductCard from "../SingleProductCard/SingleProductCard";
-import axios from "axios";
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
