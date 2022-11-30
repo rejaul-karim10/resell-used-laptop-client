@@ -27,7 +27,7 @@ const BookingModal = ({ productData, setProductData }) => {
     const phone = form.phone.value;
     const price = form.price.value;
     const location = form.location.value;
-    console.log(name, phone, price);
+    // console.log(name, phone, price);
 
     const booking = {
       buyerName: name,
@@ -37,7 +37,7 @@ const BookingModal = ({ productData, setProductData }) => {
       productName,
       location
     };
-    console.log(booking);
+    // console.log(booking);
     
     fetch("https://resell-used-laptop-server.vercel.app/bookings", {
     method: "POST",
@@ -83,7 +83,6 @@ const BookingModal = ({ productData, setProductData }) => {
               disabled
               name="name"
               type="text"
-              placeholder="Your Name"
               className="input input-bordered w-full input-primary "
             />
             <input
@@ -110,7 +109,7 @@ const BookingModal = ({ productData, setProductData }) => {
             <input
               name="location"
               type="text"
-              placeholder="Your Phone"
+              placeholder="Your Location"
               className="input input-bordered w-full input-primary"
             />
             <input

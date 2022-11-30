@@ -7,8 +7,10 @@ const SingleProductCard = ({ product, setProductData }) => {
     image,
     location,
     original_price,
+    descriptions,
     name,
     postedTime,
+    postedDate,
     productName,
     resale_price,
     sellerName,
@@ -18,7 +20,7 @@ const SingleProductCard = ({ product, setProductData }) => {
     <div>
       <div className="card w-96 bg-white shadow-xl">
         <figure>
-          <img className="p-4" src={image} alt="Shoes" />
+          <img className="h-70 p-2" src={image} alt="Shoes" />
         </figure>
         <div className="card-body">
           <h2 className="card-title">
@@ -27,15 +29,15 @@ const SingleProductCard = ({ product, setProductData }) => {
               Resell Price: {resale_price}
             </div>
           </h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
+          <p>Original Price: ${original_price}</p>
+          <p>{descriptions}</p>
           <div className="card-actions">
             <div className="badge badge-outline badge-secondary">
-              Seller: {sellerName}
+              Seller Name: {sellerName}
             </div>
-            <div className="badge badge-outline">
-              {years_of_use} Years of use
-            </div>
-            <div className="badge badge-outline">{postedTime} Years of use</div>
+            <div className="badge badge-outline">{years_of_use} Years</div>
+            <div className="badge badge-outline">Posted {postedDate}</div>
+            <div className="badge badge-outline">Location {location}</div>
           </div>
           <label
             onClick={() => setProductData(product)}

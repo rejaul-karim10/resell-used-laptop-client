@@ -1,8 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import banner2 from "../../../assets/images/banner/banner2.jpg";
 import PrimaryButton from "../../../Components/PrimaryButton/PrimaryButton";
 
 const Banner = () => {
+  
+
   return (
     <div className="hero pb-24 pt-24 bg-white rounded-md">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -14,7 +17,7 @@ const Banner = () => {
             industry. Lorem Ipsum has been the industry's standard dummy text
             ever since the
           </p>
-          <PrimaryButton>Book Now</PrimaryButton>
+         <Link to='/allProducts'> <PrimaryButton>All Products</PrimaryButton></Link>
         </div>
       </div>
     </div>
